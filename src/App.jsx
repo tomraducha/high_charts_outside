@@ -7,7 +7,7 @@ import { rooms } from "./data/rooms";
 
 function App() {
   const [data, setData] = useState([]);
-  const [selectedRoomArray, setSelectedRoomArray] = useState([]);
+  const [selectedRoomArray, setSelectedRoomArray] = useState(["Polux"]);
   const [valuesCeilingFloor, setValuesCeilingFloor] = useState({
     ceiling: null,
     floor: null,

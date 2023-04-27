@@ -1,4 +1,3 @@
-import React from "react";
 import Mutliselect from "multiselect-react-dropdown";
 
 function DropdownRoom({ onSelect }) {
@@ -14,7 +13,7 @@ function DropdownRoom({ onSelect }) {
         isObject={false}
         options={room}
         showCheckbox={true}
-        selectedValues={[]}
+        selectedValues={["Polux"]}
         style={{
           chips: {
             background: "rgba(0, 0, 0, 0.1)",

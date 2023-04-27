@@ -3,11 +3,6 @@ import Highcharts from "highcharts/highstock";
 import { colors } from "../data/color";
 
 export default function useInitialize(data, ceiling, floor) {
-  console.log("🚀 ~ file: useInitialize.jsx:5 ~ useInitialize ~ floor:", floor);
-  console.log(
-    "🚀 ~ file: useInitialize.jsx:5 ~ useInitialize ~ ceiling:",
-    ceiling
-  );
   const seriesData = [];
 
   data.forEach((obj, index) => {
