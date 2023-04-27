@@ -9,11 +9,17 @@ export default function useInitialize(data, ceiling, floor) {
     seriesData.push({
       name: `Courbe ${index + 1}`,
       data: obj,
-      color: `${colors[index % colors.length]}`,
+      color: `${colors[index].color}`,
+      lineColor: `${colors[index].lineColor}`,
     });
   });
 
   const options = {
+    plotOptions: {
+      series: {
+        lineWidth: 2,
+      },
+    },
     chart: {
       className: "chart",
       height: "800px",
@@ -62,7 +68,6 @@ export default function useInitialize(data, ceiling, floor) {
         align: "center",
         y: -40,
       },
-
       verticalAlign: "top",
       labelStyle: {
         display: "none",
@@ -94,27 +99,25 @@ export default function useInitialize(data, ceiling, floor) {
           count: 1,
           text: "Année",
         },
-        {
-          type: "all",
-          text: "TimeRangeSelector",
-        },
       ],
       inputEnabled: true,
       inputDateFormat: "%e %B %y",
-      inputBoxWidth: 160,
-      inputBoxHeight: 18,
+      inputBoxWidth: 180,
+      inputBoxHeight: 5,
       inputStyle: {
         fontSize: "15px",
         color: "black",
       },
-      selected: 7,
       buttonTheme: {
+        title: {
+          text: "TimeRangeSelector",
+        },
         "stroke-width": 1,
         stroke: "grey",
         r: 2,
         style: {
           fontSize: "19px",
-          border: "solid 1px black",
+          border: "solid 7px black",
           color: "grey",
         },
       },
@@ -123,8 +126,11 @@ export default function useInitialize(data, ceiling, floor) {
 
     yAxis: [
       {
-        floor: floor,
-        ceiling: ceiling,
+        // floor: floor,
+        // ceiling: ceiling,
+        floor: 10,
+        ceiling: 100,
+
         labels: {
           enabled: false,
         },
@@ -153,8 +159,6 @@ export default function useInitialize(data, ceiling, floor) {
     title: {
       useHTML: true,
       text: `<img src=${Period} />`,
-      x: -28,
-      y: 10,
     },
 
     tooltip: {

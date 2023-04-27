@@ -11,6 +11,7 @@
 .drop-down-room {
     display: flex;
     justify-content: center;
+    margin-bottom: 18px;
 } 
 
 .drop-down-room select {
@@ -27,3 +28,26 @@
   border-radius: 1px;
   box-sizing: border-box;
 }
+
+.highcharts-range-selector-buttons {
+  transform: translate(48px, -45px);
+  }
+
+  .highcharts-container select {
+    transform: translate(51px, -50px);
+  }
+
+  .highcharts-title {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-40%, 0%);
+  }
+
+
+  .search-wrapper.searchWrapper {
+   border-color: black;
+    border-width: 1px;
+  } 
+
+  
