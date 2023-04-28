@@ -50,3 +50,21 @@
     border-width: 1px;
     box-shadow: 0 0 0 0.07rem rgba(0, 0, 0, 0.25);
   } 
+
+  .vertical-text {
+  transform: rotate(-90deg);
+  transform-origin: left top 0;
+  position: absolute;
+  top: 50%;
+  left: 40px; 
+  letter-spacing: 1px;
+  font:  18px sans-serif;
+  }
+  
+  #highcharts-gx98fuw-408 {
+    border-bottom-width: 10px;
+  }
+  .chart {
+    border-left-width: 2px;
+}
+  

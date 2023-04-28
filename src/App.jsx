@@ -4,6 +4,7 @@ import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
 import axios from "axios";
 import { minFloor, maxFloor, getRoomId } from "./Util/utilsApp";
 import { rooms } from "./data/rooms";
+import Temperature from "./components/Temperature";
 
 function App() {
   const [data, setData] = useState([]);
@@ -96,6 +97,7 @@ function App() {
         ceiling={valuesCeilingFloor.ceiling}
         floor={valuesCeilingFloor.floor}
       />
+      <Temperature />
     </div>
   );
 }

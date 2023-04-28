@@ -139,19 +139,6 @@ export default function useInitialize(data, ceiling, floor) {
         lineWidth: 0,
         opposite: false,
       },
-      {
-        title: {
-          text: "Température",
-
-          style: {
-            fontSize: "17px",
-          },
-        },
-        opposite: false,
-        labels: {
-          enabled: false,
-        },
-      },
     ],
 
     series: seriesData,
