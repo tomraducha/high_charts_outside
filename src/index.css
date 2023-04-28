@@ -48,6 +48,5 @@
   .search-wrapper.searchWrapper {
    border-color: black;
     border-width: 1px;
+    box-shadow: 0 0 0 0.07rem rgba(0, 0, 0, 0.25);
   } 
-
-  

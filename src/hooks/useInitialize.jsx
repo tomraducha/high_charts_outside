@@ -1,16 +1,16 @@
 import Period from "../images/Period.svg";
 import Highcharts from "highcharts/highstock";
-import { colors } from "../data/color";
+import { infoSeries } from "../data/infoSeries";
 
 export default function useInitialize(data, ceiling, floor) {
   const seriesData = [];
 
   data.forEach((obj, index) => {
     seriesData.push({
-      name: `Courbe ${index + 1}`,
+      name: `${infoSeries[index].room}`,
       data: obj,
-      color: `${colors[index].color}`,
-      lineColor: `${colors[index].lineColor}`,
+      color: `${infoSeries[index].color}`,
+      lineColor: `${infoSeries[index].lineColor}`,
     });
   });
 
@@ -163,20 +163,25 @@ export default function useInitialize(data, ceiling, floor) {
 
     tooltip: {
       valueSuffix: "°C",
-      backgroundColor: "rgba(161, 234, 180, 0.8)",
-      borderColor: "rgba(161, 234, 180)",
+      backgroundColor: "rgba(236, 236, 237, 1)",
+      borderColor: "rgba(236, 236, 237, 1)",
       borderRadius: 20,
       borderWidth: 2,
-      shadow: false,
+      shadow: true,
       style: {
-        color: "green",
+        color: "black",
         fontSize: "15px",
       },
-
+      shared: true,
       formatter: function () {
         const date = Highcharts.dateFormat("%e %B %Y", this.x);
-        const temp = this.y;
-        return `<b>${date}</b><br>Temp: ${temp}°C`;
+        let tooltipContent = `<b>${date}</b><br>`;
+        this.points.forEach((point) => {
+          const temp = point.y;
+          const seriesName = point.series.name;
+          tooltipContent += `<br>${seriesName}: ${temp}°C`;
+        });
+        return tooltipContent;
       },
     },
   };
