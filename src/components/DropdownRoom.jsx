@@ -16,7 +16,7 @@ function DropdownRoom({ onSelect }) {
         selectedValues={["Pollux"]}
         style={{
           chips: {
-            background: "#7a7878b0",
+            background: "rgba(46, 44, 45, 0.8)",
             color: "white",
             fontSize: "1rem",
           },

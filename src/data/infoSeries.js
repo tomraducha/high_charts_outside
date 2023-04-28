@@ -5,7 +5,7 @@ const infoSeries = [
     room: "Pollux",
   },
   {
-    color: "rgba(359, 114, 114, 1)",
+    color: "rgba(359, 114, 124, 1)",
     lineColor: "rgba(255, 114, 114, 1)",
     room: "Sirius",
   },

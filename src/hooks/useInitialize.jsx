@@ -99,31 +99,32 @@ export default function useInitialize(data, ceiling, floor) {
           count: 1,
           text: "Année",
         },
+        {
+          type: "all",
+          text: "TimeRangeSelector",
+        },
       ],
       inputEnabled: true,
       inputDateFormat: "%e %B %y",
-      inputBoxWidth: 180,
-      inputBoxHeight: 5,
+      inputBoxWidth: 160,
+      inputBoxHeight: 18,
       inputStyle: {
         fontSize: "15px",
         color: "black",
       },
+      selected: 7,
       buttonTheme: {
-        title: {
-          text: "TimeRangeSelector",
-        },
         "stroke-width": 1,
         stroke: "grey",
         r: 2,
         style: {
           fontSize: "19px",
-          border: "solid 7px black",
+          border: "solid 1px black",
           color: "grey",
         },
       },
       allButtonsEnabled: true,
     },
-
     yAxis: [
       {
         // floor: floor,
