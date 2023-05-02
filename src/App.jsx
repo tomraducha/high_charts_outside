@@ -10,6 +10,7 @@ import ParameterButton from "./components/ParameterButton";
 function App() {
   const [data, setData] = useState([]);
   const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
+  const [buttonPopup, setButtonPopup] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -65,14 +66,20 @@ function App() {
     }
   }
 
-  function handleSelect(option) {
+  function handleSelectedItems(option) {
     setSelectedRoomArray(option);
   }
 
   return (
     <div className="app">
-      <ParameterButton />
-      <DropdownRoom onSelect={handleSelect} />
+      <ParameterButton
+        buttonPopup={buttonPopup}
+        setButtonPopup={setButtonPopup}
+      />
+      <DropdownRoom
+        onSelect={handleSelectedItems}
+        defaultSelected={["Pollux"]}
+      />
       <HighchartsFlags data={data} />
       <Temperature />
     </div>
