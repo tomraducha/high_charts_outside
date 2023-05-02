@@ -5,6 +5,7 @@ import axios from "axios";
 import { getRoomId } from "./Util/utilsApp";
 import { rooms } from "./data/rooms";
 import Temperature from "./components/Temperature";
+import ParameterButton from "./components/ParameterButton";
 
 function App() {
   const [data, setData] = useState([]);
@@ -70,6 +71,7 @@ function App() {
 
   return (
     <div className="app">
+      <ParameterButton />
       <DropdownRoom onSelect={handleSelect} />
       <HighchartsFlags data={data} />
       <Temperature />
