@@ -2,25 +2,18 @@ import { useEffect, useState } from "react";
 import DropdownRoom from "./components/DropdownRoom";
 import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
 import axios from "axios";
-import { minFloor, maxFloor, getRoomId } from "./Util/utilsApp";
+import { getRoomId } from "./Util/utilsApp";
 import { rooms } from "./data/rooms";
 import Temperature from "./components/Temperature";
 
 function App() {
   const [data, setData] = useState([]);
   const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
-  const [valuesCeilingFloor, setValuesCeilingFloor] = useState({
-    ceiling: null,
-    floor: null,
-  });
 
   useEffect(() => {
     fetchData();
   }, [selectedRoomArray]);
 
-  useEffect(() => {
-    getAllValues(data);
-  }, [data]);
   import.meta.env.VITE_BASE_URL;
   async function fetchData() {
     const username = import.meta.env.VITE_USERNAME;
@@ -71,20 +64,6 @@ function App() {
     }
   }
 
-  function getAllValues(data) {
-    const allValues = [];
-
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].length; j++) {
-        allValues.push(data[i][j][1]);
-      }
-    }
-    const resultAllValues = allValues;
-    const ceiling = maxFloor(resultAllValues);
-    const floor = minFloor(resultAllValues);
-    setValuesCeilingFloor({ ceiling, floor });
-  }
-
   function handleSelect(option) {
     setSelectedRoomArray(option);
   }
@@ -92,11 +71,7 @@ function App() {
   return (
     <div className="app">
       <DropdownRoom onSelect={handleSelect} />
-      <HighchartsFlags
-        data={data}
-        ceiling={valuesCeilingFloor.ceiling}
-        floor={valuesCeilingFloor.floor}
-      />
+      <HighchartsFlags data={data} />
       <Temperature />
     </div>
   );

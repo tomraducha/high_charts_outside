@@ -4,7 +4,7 @@ import HighchartsAccessibility from "highcharts/modules/accessibility";
 import useInitialize from "../../hooks/useInitialize";
 HighchartsAccessibility(Highcharts);
 
-function HighchartsFlags({ data, ceiling, floor }) {
+function HighchartsFlags({ data }) {
   const options = useInitialize(data);
   return (
     <div className="highcharts-container">
@@ -13,8 +13,6 @@ function HighchartsFlags({ data, ceiling, floor }) {
           highcharts={Highcharts}
           constructorType={"stockChart"}
           options={options}
-          ceiling={ceiling}
-          floor={floor}
         />
       ) : (
         <div>Loading...</div>

@@ -2,7 +2,7 @@ import Period from "../images/Period.svg";
 import Highcharts from "highcharts/highstock";
 import { infoSeries } from "../data/infoSeries";
 
-export default function useInitialize(data, ceiling, floor) {
+export default function useInitialize(data) {
   const seriesData = [];
 
   data.forEach((obj, index) => {
@@ -127,8 +127,6 @@ export default function useInitialize(data, ceiling, floor) {
     },
     yAxis: [
       {
-        // floor: floor,
-        // ceiling: ceiling,
         floor: 10,
         ceiling: 100,
 
