@@ -1,7 +1,17 @@
 import Mutliselect from "multiselect-react-dropdown";
+import { useEffect, useState } from "react";
+import { fetchAllRoom } from "../Util/utilsApi";
 
 function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
-  const room = ["Pollux", "Sirius", "Proxima", "Scuti"];
+  const [room, setRoom] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAllRoom();
+      setRoom(data);
+    }
+    fetchData();
+  }, []);
 
   function handleOptionSelect(selectedItems) {
     onSelect([...selectedItems]);
