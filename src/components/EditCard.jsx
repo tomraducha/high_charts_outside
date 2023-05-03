@@ -31,11 +31,7 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
           placeholder="Sélectionner des pièces"
         />
         {selectedRooms.map((room) => (
-          <div
-            className="selected-room"
-            key={room.id}
-            style={{ display: "flex", justifyContent: "space-between" }}
-          >
+          <div className="selected-room" key={room.id}>
             <span>{room.name}</span>
             <span>{room.id}</span>
           </div>
