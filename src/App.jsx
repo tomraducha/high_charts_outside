@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import DropdownRoom from "./components/DropdownRoom";
 import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
-import axios from "axios";
 import { getRoomId } from "./Util/utilsApp";
 import { rooms } from "./data/rooms";
 import Temperature from "./components/Temperature";
 import ParameterButton from "./components/ParameterButton";
+import { fetchRoomData } from "./Util/utilsApi";
 
 function App() {
   const [data, setData] = useState([]);
@@ -16,32 +16,15 @@ function App() {
     fetchData();
   }, [selectedRoomArray]);
 
-  import.meta.env.VITE_BASE_URL;
   async function fetchData() {
-    const username = import.meta.env.VITE_USERNAME;
-    const password = import.meta.env.VITE_PASSWORD;
-    const authString = username + ":" + password;
-    const encodedAuthString = btoa(authString);
-
     const selectedRoomIds = selectedRoomArray.map((roomName) =>
       getRoomId(rooms, roomName)
     );
 
     if (selectedRoomIds.length > 0) {
       try {
-        const response = await Promise.all(
-          selectedRoomIds.map((roomId) =>
-            axios.get(
-              `https://192.168.12.146:443/v2/history/${roomId}?retrieveValues=true&period=lastYear`,
-              {
-                headers: {
-                  mode: "cors",
-                  Authorization: "Basic " + encodedAuthString,
-                },
-              }
-            )
-          )
-        );
+        const response = await fetchRoomData(selectedRoomIds);
+
         const dataRoom = response.map((element) => {
           return element.data[0].data;
         });
