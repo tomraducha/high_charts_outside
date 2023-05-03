@@ -79,6 +79,7 @@ function App() {
       <DropdownRoom
         onSelect={handleSelectedItems}
         defaultSelected={["Pollux"]}
+        placeholder="Sélectionner des pièces"
       />
       <HighchartsFlags data={data} />
       <Temperature />

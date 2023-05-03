@@ -1,6 +1,6 @@
 import Mutliselect from "multiselect-react-dropdown";
 
-function DropdownRoom({ onSelect, defaultSelected = [] }) {
+function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
   const room = ["Pollux", "Sirius", "Proxima", "Scuti"];
 
   function handleOptionSelect(selectedItems) {
@@ -14,6 +14,7 @@ function DropdownRoom({ onSelect, defaultSelected = [] }) {
         options={room}
         showCheckbox={true}
         selectedValues={defaultSelected}
+        placeholder={placeholder}
         style={{
           chips: {
             background: "rgba(46, 44, 45, 0.8)",

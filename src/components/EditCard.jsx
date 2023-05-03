@@ -16,12 +16,20 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
     );
   }
 
+  function handleClosePopup() {
+    setSelectedRooms([]);
+    setButtonPopup(false);
+  }
+
   return (
-    <Popup open={buttonPopup} onClose={() => setButtonPopup(false)}>
+    <Popup open={buttonPopup} onClose={handleClosePopup}>
       <div className="edit-card">
-        <img src={Close} alt="close" onClick={() => setButtonPopup(false)} />
+        <img src={Close} alt="close" onClick={handleClosePopup} />
         <h3>Pièces et ID sélectionnés</h3>
-        <DropdownRoom onSelect={handleSelectedItems} />
+        <DropdownRoom
+          onSelect={handleSelectedItems}
+          placeholder="Sélectionner des pièces"
+        />
         {selectedRooms.map((room) => (
           <div
             className="selected-room"
