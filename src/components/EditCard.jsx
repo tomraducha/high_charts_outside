@@ -1,12 +1,13 @@
 import Popup from "reactjs-popup";
 import DropdownRoom from "./DropdownRoom";
-import { rooms } from "../data/rooms";
 import { useState } from "react";
 import Close from "../images/Close.png";
 import PropTypes from "prop-types";
+import useFetchAllRooms from "../hooks/useFetchAllRoomsData";
 
 export default function EditCard({ buttonPopup, setButtonPopup }) {
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const rooms = useFetchAllRooms();
 
   function handleSelectedItems(selectedItems) {
     setSelectedRooms(

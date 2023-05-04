@@ -4,29 +4,19 @@ import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
 import { getRoomId } from "./Util/utilsApp";
 import Temperature from "./components/Temperature";
 import ParameterButton from "./components/ParameterButton";
-import { transformArrayToObject } from "./Util/utilsApp";
-import { fetchRoomData, fetchAllRooms } from "./Util/utilsApi";
+import { fetchRoomData } from "./Util/utilsApi";
+import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
 
 function App() {
   const [data, setData] = useState([]);
   const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
   const [buttonPopup, setButtonPopup] = useState(false);
-  const [rooms, setRooms] = useState({});
+  const rooms = useFetchAllRooms();
+  console.log("🚀 ~ file: App.jsx:15 ~ App ~ rooms:", rooms);
 
   useEffect(() => {
     fetchData();
   }, [selectedRoomArray]);
-
-  useEffect(() => {
-    fetchAllRooms()
-      .then((response) => {
-        const roomsObject = transformArrayToObject(response);
-        setRooms(roomsObject);
-      })
-      .catch((error) => {
-        console.error("Error during data recovery:", error);
-      });
-  }, []);
 
   async function fetchData() {
     const selectedRoomIds = selectedRoomArray.map((roomId) =>
@@ -69,6 +59,7 @@ function App() {
       />
       <DropdownRoom
         onSelect={handleSelectedItems}
+        defaultSelected={["Pollux"]}
         placeholder="Sélectionner des pièces"
       />
       <HighchartsFlags data={data} />
