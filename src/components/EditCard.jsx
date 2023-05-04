@@ -12,8 +12,8 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
   function handleSelectedItems(selectedItems) {
     setSelectedRooms(
       selectedItems.map((item) => ({
-        name: item,
-        id: rooms[item],
+        space: item,
+        spaceId: rooms[item],
       }))
     );
   }
@@ -33,9 +33,9 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
           placeholder="Sélectionner des pièces"
         />
         {selectedRooms.map((room) => (
-          <div className="selected-room" key={room.id}>
-            <span>{room.name}</span>
-            <span>{room.id}</span>
+          <div className="selected-room" key={room.spaceId}>
+            <span>{room.space}</span>
+            <span>{room.spaceId}</span>
           </div>
         ))}
       </div>
