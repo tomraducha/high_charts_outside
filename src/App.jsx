@@ -12,7 +12,6 @@ function App() {
   const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const rooms = useFetchAllRooms();
-  console.log("🚀 ~ file: App.jsx:15 ~ App ~ rooms:", rooms);
 
   useEffect(() => {
     fetchData();
