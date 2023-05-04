@@ -1,6 +1,7 @@
 import Mutliselect from "multiselect-react-dropdown";
 import { useEffect, useState } from "react";
 import { fetchAllRoom } from "../Util/utilsApi";
+import PropTypes from "prop-types";
 
 function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
   const [room, setRoom] = useState([]);
@@ -38,5 +39,10 @@ function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
     </div>
   );
 }
+DropdownRoom.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  defaultSelected: PropTypes.array,
+};
 
 export default DropdownRoom;

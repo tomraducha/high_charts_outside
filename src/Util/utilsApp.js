@@ -1,5 +1,5 @@
-function getRoomId(data, roomName) {
-  return data[roomName];
+function getRoomId(data, roomId) {
+  return data[roomId];
 }
 
 function extractRoomNames(dataList) {
@@ -12,4 +12,15 @@ function extractRoomNames(dataList) {
   return roomNames;
 }
 
-export { getRoomId, extractRoomNames };
+function transformArrayToObject(array) {
+  let newObject = {};
+
+  for (let element of array) {
+    if (element.space && element.sourceId) {
+      newObject[element.space] = element.sourceId;
+    }
+  }
+  return newObject;
+}
+
+export { getRoomId, extractRoomNames, transformArrayToObject };

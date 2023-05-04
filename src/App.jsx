@@ -2,39 +2,47 @@ import { useEffect, useState } from "react";
 import DropdownRoom from "./components/DropdownRoom";
 import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
 import { getRoomId } from "./Util/utilsApp";
-import { rooms } from "./data/rooms";
 import Temperature from "./components/Temperature";
 import ParameterButton from "./components/ParameterButton";
-import { fetchRoomData } from "./Util/utilsApi";
+import { transformArrayToObject } from "./Util/utilsApp";
+import { fetchRoomData, fetchAllRooms } from "./Util/utilsApi";
 
 function App() {
   const [data, setData] = useState([]);
   const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [rooms, setRooms] = useState({});
 
   useEffect(() => {
     fetchData();
   }, [selectedRoomArray]);
 
-  async function fetchData() {
-    const selectedRoomIds = selectedRoomArray.map((roomName) =>
-      getRoomId(rooms, roomName)
-    );
+  useEffect(() => {
+    fetchAllRooms()
+      .then((response) => {
+        const roomsObject = transformArrayToObject(response);
+        setRooms(roomsObject);
+      })
+      .catch((error) => {
+        console.error("Error during data recovery:", error);
+      });
+  }, []);
 
+  async function fetchData() {
+    const selectedRoomIds = selectedRoomArray.map((roomId) =>
+      getRoomId(rooms, roomId)
+    );
     if (selectedRoomIds.length > 0) {
       try {
         const response = await fetchRoomData(selectedRoomIds);
-
         const dataRoom = response.map((element) => {
           return element.data[0].data;
         });
-
         const dataTimesValue = dataRoom.map((element) => {
           return element.map((data) => {
             return data;
           });
         });
-
         const resultData = dataTimesValue.map((elements) => {
           return elements.map((element) => {
             const timestamp = new Date(element.Timestamp).getTime();
@@ -61,7 +69,6 @@ function App() {
       />
       <DropdownRoom
         onSelect={handleSelectedItems}
-        defaultSelected={["Pollux"]}
         placeholder="Sélectionner des pièces"
       />
       <HighchartsFlags data={data} />

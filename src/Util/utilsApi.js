@@ -43,7 +43,7 @@ async function fetchAllRoom() {
 
     return spaces;
   } catch (error) {
-    console.error("Erreur lors de la récupération des données:", error);
+    console.error("Error during data recovery:", error);
   }
 }
 
@@ -58,18 +58,17 @@ async function fetchAllRoomId() {
         },
       }
     );
-
     const spacesId = response.data
       .map((element) => {
-        return element.spaceId !== null && element.spaceId !== undefined
-          ? element.spaceId
+        return element.sourceId !== null && element.sourceId !== undefined
+          ? element.sourceId
           : null;
       })
-      .filter((spaceId) => spaceId !== null);
+      .filter((sourceId) => sourceId !== null);
 
     return spacesId;
   } catch (error) {
-    console.error("Erreur lors de la récupération des données:", error);
+    console.error("Error during data recovery:", error);
   }
 }
 
@@ -84,20 +83,19 @@ async function fetchAllRooms() {
         },
       }
     );
-
     const rooms = response.data
       .map((element) => {
         const space =
           element.space !== null && element.space !== undefined
             ? element.space
             : null;
-        const spaceId =
-          element.spaceId !== null && element.spaceId !== undefined
-            ? element.spaceId
+        const sourceId =
+          element.sourceId !== null && element.sourceId !== undefined
+            ? element.sourceId
             : null;
 
-        if (space !== null && spaceId !== null) {
-          return { space, spaceId };
+        if (space !== null && sourceId !== null) {
+          return { space, sourceId };
         } else {
           return null;
         }
@@ -105,7 +103,7 @@ async function fetchAllRooms() {
       .filter((room) => room !== null);
     return rooms;
   } catch (error) {
-    console.error("Erreur lors de la récupération des données:", error);
+    console.error("Error during data recovery:", error);
   }
 }
 
