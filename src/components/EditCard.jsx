@@ -3,6 +3,7 @@ import DropdownRoom from "./DropdownRoom";
 import { rooms } from "../data/rooms";
 import { useState } from "react";
 import Close from "../images/Close.png";
+import PropTypes from "prop-types";
 
 export default function EditCard({ buttonPopup, setButtonPopup }) {
   const [selectedRooms, setSelectedRooms] = useState([]);
@@ -40,3 +41,8 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
     </Popup>
   );
 }
+
+EditCard.propTypes = {
+  buttonPopup: PropTypes.bool.isRequired,
+  setButtonPopup: PropTypes.func.isRequired,
+};
