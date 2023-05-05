@@ -6,7 +6,7 @@ function useFetchAllRooms() {
   const [rooms, setRooms] = useState({});
 
   useEffect(() => {
-    const fetchAllRoomsData = async () => {
+    async function fetchAllRoomsData() {
       try {
         const response = await fetchAllRooms();
         const roomsObject = transformArrayToObject(response);
@@ -14,7 +14,7 @@ function useFetchAllRooms() {
       } catch (error) {
         console.error("Error during data recovery:", error);
       }
-    };
+    }
 
     fetchAllRoomsData();
   }, []);

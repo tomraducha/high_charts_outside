@@ -6,23 +6,10 @@ import PropTypes from "prop-types";
 import useFetchAllRooms from "../hooks/useFetchAllRoomsData";
 import { fetchSpaceAndIdRooms } from "../Util/utilsApi";
 
-export default function EditCard({ buttonPopup, setButtonPopup }) {
+function EditCard({ buttonPopup, setButtonPopup }) {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const [spaceAndIdRooms, setSpaceAndIdRooms] = useState([]);
   const rooms = useFetchAllRooms();
-
-  function addIdsToSelectedRooms(spaceAndIdRooms, selectedRooms) {
-    return selectedRooms.map((selectedRoom) => {
-      const matchingRoom = spaceAndIdRooms.find(
-        (room) => room.space === selectedRoom.space
-      );
-
-      if (matchingRoom) {
-        return { ...selectedRoom, id: matchingRoom.id };
-      }
-      return selectedRoom;
-    });
-  }
 
   useEffect(() => {
     const updatedSelectedRooms = addIdsToSelectedRooms(
@@ -39,6 +26,19 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
     }
     fetchData();
   }, []);
+
+  function addIdsToSelectedRooms(spaceAndIdRooms, selectedRooms) {
+    return selectedRooms.map((selectedRoom) => {
+      const matchingRoom = spaceAndIdRooms.find(
+        (room) => room.space === selectedRoom.space
+      );
+
+      if (matchingRoom) {
+        return { ...selectedRoom, id: matchingRoom.id };
+      }
+      return selectedRoom;
+    });
+  }
 
   function handleSelectedItems(selectedItems) {
     setSelectedRooms(
@@ -80,3 +80,5 @@ EditCard.propTypes = {
   buttonPopup: PropTypes.bool.isRequired,
   setButtonPopup: PropTypes.func.isRequired,
 };
+
+export default EditCard;

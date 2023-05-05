@@ -2,7 +2,7 @@ import Params from "../images/Params.png";
 import EditCard from "./EditCard";
 import PropTypes from "prop-types";
 
-export default function ParameterButton({ buttonPopup, setButtonPopup }) {
+function ParameterButton({ buttonPopup, setButtonPopup }) {
   function handleClick() {
     setButtonPopup(true);
   }
@@ -18,3 +18,5 @@ ParameterButton.propTypes = {
   buttonPopup: PropTypes.bool.isRequired,
   setButtonPopup: PropTypes.func.isRequired,
 };
+
+export default ParameterButton;
