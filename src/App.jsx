@@ -9,10 +9,17 @@ import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
 
 function App() {
   const [data, setData] = useState([]);
-  const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
+  const [selectedRoomArray, setSelectedRoomArray] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [selectedRoomIds, setSelectedRoomIds] = useState([]);
   const rooms = useFetchAllRooms();
+
+  useEffect(() => {
+    if (Object.keys(rooms).length > 0) {
+      const firstRoom = Object.keys(rooms)[1];
+      setSelectedRoomArray([firstRoom]);
+    }
+  }, [rooms]);
 
   useEffect(() => {
     async function updateSelectedRoomIds() {
@@ -71,7 +78,7 @@ function App() {
       />
       <DropdownRoom
         onSelect={handleSelectedItems}
-        defaultSelected={["Pollux"]}
+        defaultSelected={selectedRoomArray}
         placeholder="Sélectionner des pièces"
       />
       <HighchartsFlags data={data} />
