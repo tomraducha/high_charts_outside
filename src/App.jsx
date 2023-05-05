@@ -11,16 +11,29 @@ function App() {
   const [data, setData] = useState([]);
   const [selectedRoomArray, setSelectedRoomArray] = useState(["Pollux"]);
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [selectedRoomIds, setSelectedRoomIds] = useState([]);
   const rooms = useFetchAllRooms();
 
   useEffect(() => {
+    async function updateSelectedRoomIds() {
+      const newSelectedRoomIds = await Promise.all(
+        selectedRoomArray.map(async (roomId) => {
+          return await getRoomId(rooms, roomId);
+        })
+      );
+      setSelectedRoomIds(newSelectedRoomIds);
+    }
+
+    if (Object.keys(rooms).length > 0) {
+      updateSelectedRoomIds();
+    }
+  }, [rooms, selectedRoomArray]);
+
+  useEffect(() => {
     fetchData();
-  }, [selectedRoomArray]);
+  }, [selectedRoomIds]);
 
   async function fetchData() {
-    const selectedRoomIds = selectedRoomArray.map((roomId) =>
-      getRoomId(rooms, roomId)
-    );
     if (selectedRoomIds.length > 0) {
       try {
         const response = await fetchRoomData(selectedRoomIds);

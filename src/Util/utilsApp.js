@@ -1,5 +1,6 @@
-function getRoomId(data, roomId) {
-  return data[roomId];
+function getRoomId(rooms, roomId) {
+  console.log("rooms in getRoomId:", rooms);
+  return rooms[roomId];
 }
 
 function extractRoomNames(dataList) {
