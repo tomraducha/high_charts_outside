@@ -160,16 +160,6 @@ export default function useInitialize(data) {
         fontSize: "15px",
       },
       shared: true,
-      formatter: function () {
-        const date = Highcharts.dateFormat("%e %B %Y", this.x);
-        let tooltipContent = `<b>${date}</b><br>`;
-        this.points.forEach((point) => {
-          const temp = point.y;
-          const seriesName = point.series.name;
-          tooltipContent += `<br>${seriesName}: ${temp}°C`;
-        });
-        return tooltipContent;
-      },
     },
   };
   return options;

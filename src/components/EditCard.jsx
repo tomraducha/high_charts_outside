@@ -58,7 +58,7 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
     <Popup open={buttonPopup} onClose={handleClosePopup}>
       <div className="edit-card">
         <img src={Close} alt="close" onClick={handleClosePopup} />
-        <h3>Pièces sélectionnés</h3>
+        <h3>Sélectionnez une pièce</h3>
         <DropdownRoom
           onSelect={handleSelectedItems}
           placeholder="Sélectionner des pièces"
