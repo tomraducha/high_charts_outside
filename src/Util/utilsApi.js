@@ -107,4 +107,43 @@ async function fetchAllRooms() {
   }
 }
 
-export { fetchRoomData, fetchAllRoom, fetchAllRoomId, fetchAllRooms };
+async function fetchSpaceAndIdRooms() {
+  try {
+    const response = await axios.get(
+      `https://192.168.12.146:443/v2/history?retrieveValues=true&period=lastYear`,
+      {
+        headers: {
+          mode: "cors",
+          Authorization: "Basic " + encodedAuthString,
+        },
+      }
+    );
+    const rooms = response.data
+      .map((element) => {
+        const space =
+          element.space !== null && element.space !== undefined
+            ? element.space
+            : null;
+        const id =
+          element.id !== null && element.id !== undefined ? element.id : null;
+
+        if (space !== null && id !== null) {
+          return { space, id };
+        } else {
+          return null;
+        }
+      })
+      .filter((room) => room !== null);
+    return rooms;
+  } catch (error) {
+    console.error("Error during data recovery:", error);
+  }
+}
+
+export {
+  fetchRoomData,
+  fetchAllRoom,
+  fetchAllRoomId,
+  fetchAllRooms,
+  fetchSpaceAndIdRooms,
+};

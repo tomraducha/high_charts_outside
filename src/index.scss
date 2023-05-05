@@ -76,11 +76,10 @@
 .popup-content {
   margin: auto;
   background: rgb(255, 255, 255);
-  width: 50%;
   padding: 5px;
   box-shadow: 0 0 0 0.11rem rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  width: 40%;
+  width: 50%;
 
   .optionListContainer.displayBlock {
     bottom: 100%;
@@ -136,5 +135,9 @@
 
   .icon_cancel.closeIcon {
     display: none;
+  }
+
+  .multiSelectContainer {
+    width: 100%;
   }
 }

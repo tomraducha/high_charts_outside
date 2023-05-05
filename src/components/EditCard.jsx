@@ -1,13 +1,44 @@
 import Popup from "reactjs-popup";
 import DropdownRoom from "./DropdownRoom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Close from "../images/Close.png";
 import PropTypes from "prop-types";
 import useFetchAllRooms from "../hooks/useFetchAllRoomsData";
+import { fetchSpaceAndIdRooms } from "../Util/utilsApi";
 
 export default function EditCard({ buttonPopup, setButtonPopup }) {
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const [spaceAndIdRooms, setSpaceAndIdRooms] = useState([]);
   const rooms = useFetchAllRooms();
+
+  function addIdsToSelectedRooms(spaceAndIdRooms, selectedRooms) {
+    return selectedRooms.map((selectedRoom) => {
+      const matchingRoom = spaceAndIdRooms.find(
+        (room) => room.space === selectedRoom.space
+      );
+
+      if (matchingRoom) {
+        return { ...selectedRoom, id: matchingRoom.id };
+      }
+      return selectedRoom;
+    });
+  }
+
+  useEffect(() => {
+    const updatedSelectedRooms = addIdsToSelectedRooms(
+      spaceAndIdRooms,
+      selectedRooms
+    );
+    setSelectedRooms(updatedSelectedRooms);
+  }, [spaceAndIdRooms, selectedRooms]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const fetchedRooms = await fetchSpaceAndIdRooms();
+      setSpaceAndIdRooms(fetchedRooms);
+    }
+    fetchData();
+  }, []);
 
   function handleSelectedItems(selectedItems) {
     setSelectedRooms(
@@ -27,15 +58,17 @@ export default function EditCard({ buttonPopup, setButtonPopup }) {
     <Popup open={buttonPopup} onClose={handleClosePopup}>
       <div className="edit-card">
         <img src={Close} alt="close" onClick={handleClosePopup} />
-        <h3>Pièces et ID sélectionnés</h3>
+        <h3>Pièces sélectionnés</h3>
         <DropdownRoom
           onSelect={handleSelectedItems}
           placeholder="Sélectionner des pièces"
         />
         {selectedRooms.map((room) => (
           <div className="selected-room" key={room.spaceId}>
-            <span>{room.space}</span>
-            <span>{room.spaceId}</span>
+            <div style={{ fontWeight: "bold" }}>{room.space}:</div>
+            <div>
+              {room.id}/{room.spaceId}
+            </div>
           </div>
         ))}
       </div>
