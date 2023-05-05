@@ -129,9 +129,10 @@ export default function useInitialize(data) {
       {
         floor: 10,
         ceiling: 100,
-
         labels: {
-          enabled: false,
+          align: "left",
+          x: 0,
+          y: 0,
         },
       },
       {
