@@ -1,8 +1,8 @@
 import Period from "../images/Period.svg";
-import Highcharts from "highcharts/highstock";
 import { infoSeries } from "../data/infoSeries";
+import PropTypes from "prop-types";
 
-export default function useInitialize(data) {
+function useInitialize(data) {
   const seriesData = [];
 
   data.forEach((obj, index) => {
@@ -129,9 +129,10 @@ export default function useInitialize(data) {
       {
         floor: 10,
         ceiling: 100,
-
         labels: {
-          enabled: false,
+          align: "left",
+          x: 0,
+          y: 0,
         },
       },
       {
@@ -159,17 +160,13 @@ export default function useInitialize(data) {
         fontSize: "15px",
       },
       shared: true,
-      formatter: function () {
-        const date = Highcharts.dateFormat("%e %B %Y", this.x);
-        let tooltipContent = `<b>${date}</b><br>`;
-        this.points.forEach((point) => {
-          const temp = point.y;
-          const seriesName = point.series.name;
-          tooltipContent += `<br>${seriesName}: ${temp}°C`;
-        });
-        return tooltipContent;
-      },
     },
   };
   return options;
 }
+
+useInitialize.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+export default useInitialize;
