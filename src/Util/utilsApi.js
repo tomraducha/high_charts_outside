@@ -1,17 +1,20 @@
+/* Libs & plugins */
 import axios from "axios";
 
 const username = import.meta.env.VITE_USERNAME;
 const password = import.meta.env.VITE_PASSWORD;
-const authString = `${username}:${password}`;
-const encodedAuthString = btoa(authString);
-
 const baseUrl = import.meta.env.VITE_BASE_URL;
 const urlSuffix = import.meta.env.VITE_URL_SUFFIX;
-
+const authString = `${username}:${password}`;
+const encodedAuthString = btoa(authString);
 const headers = {
   mode: "cors",
   Authorization: `Basic ${encodedAuthString}`,
 };
+
+////////////////////////////////////////////////////////////////
+// Methods
+////////////////////////////////////////////////////////////////
 
 async function fetchData(url, mapFunction) {
   try {
