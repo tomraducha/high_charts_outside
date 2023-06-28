@@ -1,8 +1,9 @@
 /* BTIB */
-import DropdownRoom from "./DropdownRoom";
-import Close from "../images/Close.png";
-import useFetchAllRooms from "../hooks/useFetchAllRoomsData";
-import { fetchSpaceAndIdRooms } from "../Util/utilsApi";
+import Close from "../../images/Close.png";
+import useFetchAllRooms from "../../hooks/useFetchAllRoomsData";
+import DropdownRoom from "../DropdownRoom";
+import { fetchSpaceAndIdRooms } from "../../Util/utilsApi";
+import { areSelectedRoomsEqual } from "./utils";
 /* Libs & plugins */
 import { useEffect, useState } from "react";
 import Popup from "reactjs-popup";
@@ -18,7 +19,10 @@ function EditCard({ buttonPopup, setButtonPopup }) {
       spaceAndIdRooms,
       selectedRooms
     );
-    setSelectedRooms(updatedSelectedRooms);
+    // avoid updating if the new values are identical to the old ones
+    if (!areSelectedRoomsEqual(updatedSelectedRooms, selectedRooms)) {
+      setSelectedRooms(updatedSelectedRooms);
+    }
   }, [spaceAndIdRooms, selectedRooms]);
 
   useEffect(() => {
