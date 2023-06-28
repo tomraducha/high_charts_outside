@@ -1,6 +1,6 @@
 /* BTIB */
 import Params from "../images/Params.png";
-import EditCard from "./EditCard";
+import EditCard from "./EditCard/EditCard";
 /* Libs & plugins */
 import PropTypes from "prop-types";
 
