@@ -1,5 +1,7 @@
+/* BTIB */
 import Period from "../images/Period.svg";
 import { infoSeries } from "../data/infoSeries";
+/* Libs & plugins */
 import PropTypes from "prop-types";
 
 function useInitialize(data) {

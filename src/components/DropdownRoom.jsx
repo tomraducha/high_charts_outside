@@ -1,6 +1,8 @@
+/* BTIB */
 import Mutliselect from "multiselect-react-dropdown";
-import { useEffect, useState } from "react";
 import { fetchAllRoom } from "../Util/utilsApi";
+/* Libs & plugins */
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
@@ -14,9 +16,17 @@ function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
     fetchData();
   }, []);
 
+  ////////////////////////////////////////////////////////////////
+  // Methods
+  ////////////////////////////////////////////////////////////////
+
   function handleOptionSelect(selectedItems) {
     onSelect([...selectedItems]);
   }
+
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return (
     <div className="drop-down-room">

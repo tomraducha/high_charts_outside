@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+/* BTIB */
 import { fetchAllRooms } from "../Util/utilsApi";
 import { transformArrayToObject } from "../Util/utilsApp";
+/* Libs & plugins */
+import { useState, useEffect } from "react";
 
 function useFetchAllRooms() {
   const [rooms, setRooms] = useState({});
@@ -18,6 +20,10 @@ function useFetchAllRooms() {
 
     fetchAllRoomsData();
   }, []);
+
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return rooms;
 }

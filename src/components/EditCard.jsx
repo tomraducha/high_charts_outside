@@ -1,10 +1,12 @@
-import Popup from "reactjs-popup";
+/* BTIB */
 import DropdownRoom from "./DropdownRoom";
-import { useEffect, useState } from "react";
 import Close from "../images/Close.png";
-import PropTypes from "prop-types";
 import useFetchAllRooms from "../hooks/useFetchAllRoomsData";
 import { fetchSpaceAndIdRooms } from "../Util/utilsApi";
+/* Libs & plugins */
+import { useEffect, useState } from "react";
+import Popup from "reactjs-popup";
+import PropTypes from "prop-types";
 
 function EditCard({ buttonPopup, setButtonPopup }) {
   const [selectedRooms, setSelectedRooms] = useState([]);
@@ -26,6 +28,10 @@ function EditCard({ buttonPopup, setButtonPopup }) {
     }
     fetchData();
   }, []);
+
+  ////////////////////////////////////////////////////////////////
+  // Methods
+  ////////////////////////////////////////////////////////////////
 
   function addIdsToSelectedRooms(spaceAndIdRooms, selectedRooms) {
     return selectedRooms.map((selectedRoom) => {
@@ -53,6 +59,10 @@ function EditCard({ buttonPopup, setButtonPopup }) {
     setSelectedRooms([]);
     setButtonPopup(false);
   }
+
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return (
     <Popup open={buttonPopup} onClose={handleClosePopup}>

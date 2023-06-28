@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+/* BTIB */
 import DropdownRoom from "./components/DropdownRoom";
 import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
+import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
 import { getRoomId } from "./Util/utilsApp";
 import Temperature from "./components/Temperature";
 import ParameterButton from "./components/ParameterButton";
 import { fetchRoomData } from "./Util/utilsApi";
-import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
+/* Libs & plugins */
+import { useEffect, useState } from "react";
 
 function App() {
   const [data, setData] = useState([]);
@@ -40,6 +42,10 @@ function App() {
     fetchData();
   }, [selectedRoomIds]);
 
+  ////////////////////////////////////////////////////////////////
+  // Methods
+  ////////////////////////////////////////////////////////////////
+
   async function fetchData() {
     if (selectedRoomIds.length > 0) {
       try {
@@ -69,6 +75,10 @@ function App() {
   function handleSelectedItems(option) {
     setSelectedRoomArray(option);
   }
+
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return (
     <div className="app">
