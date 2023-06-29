@@ -10,10 +10,6 @@ HighchartsAccessibility(Highcharts);
 function HighchartsFlags({ data }) {
   const options = useInitialize(data);
 
-  ////////////////////////////////////////////////////////////////
-  // JSX
-  ////////////////////////////////////////////////////////////////
-
   return (
     <div className="highcharts-container">
       {data.length > 0 ? (

@@ -1,6 +1,9 @@
 /* Libs & plugins */
 import axios from "axios";
 
+/**
+ * Environment variable definitions
+ **/
 const username = import.meta.env.VITE_USERNAME;
 const password = import.meta.env.VITE_PASSWORD;
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -12,10 +15,9 @@ const headers = {
   Authorization: `Basic ${encodedAuthString}`,
 };
 
-////////////////////////////////////////////////////////////////
-// Methods
-////////////////////////////////////////////////////////////////
-
+/**
+ * Fetch data from the provided URL and applies the mapping function to the received data.
+ **/
 async function fetchData(url, mapFunction) {
   try {
     const response = await axios.get(url, { headers });
@@ -25,6 +27,9 @@ async function fetchData(url, mapFunction) {
   }
 }
 
+/**
+ * Fetch data for specific rooms based on their IDs.
+ **/
 async function fetchRoomData(selectedRoomIds) {
   return await Promise.all(
     selectedRoomIds.map((roomId) =>
@@ -35,6 +40,9 @@ async function fetchRoomData(selectedRoomIds) {
   );
 }
 
+/**
+ * Fetch data for all rooms.
+ **/
 async function fetchAllRoom() {
   return await fetchData(
     `${baseUrl}/v2/history?${urlSuffix}`,
@@ -42,6 +50,9 @@ async function fetchAllRoom() {
   );
 }
 
+/**
+ * Fetch IDs for all rooms.
+ **/
 async function fetchAllRoomId() {
   return await fetchData(
     `${baseUrl}/v2/history?${urlSuffix}`,
@@ -49,6 +60,9 @@ async function fetchAllRoomId() {
   );
 }
 
+/**
+ * Fetch space and sourceId for all rooms.
+ **/
 async function fetchAllRooms() {
   return await fetchData(`${baseUrl}/v2/history?${urlSuffix}`, (element) => {
     const { space = null, sourceId = null } = element;
@@ -56,6 +70,9 @@ async function fetchAllRooms() {
   });
 }
 
+/**
+ * Fetch space and id for all rooms.
+ **/
 async function fetchSpaceAndIdRooms() {
   return await fetchData(`${baseUrl}/v2/history?${urlSuffix}`, (element) => {
     const { space = null, id = null } = element;

@@ -34,6 +34,24 @@ function EditCard({ buttonPopup, setButtonPopup }) {
   }, []);
 
   ////////////////////////////////////////////////////////////////
+  // Event handlers
+  ////////////////////////////////////////////////////////////////
+
+  function handleSelectedItems(selectedItems) {
+    setSelectedRooms(
+      selectedItems.map((item) => ({
+        space: item,
+        spaceId: rooms[item],
+      }))
+    );
+  }
+
+  function handleClosePopup() {
+    setSelectedRooms([]);
+    setButtonPopup(false);
+  }
+
+  ////////////////////////////////////////////////////////////////
   // Methods
   ////////////////////////////////////////////////////////////////
 
@@ -48,20 +66,6 @@ function EditCard({ buttonPopup, setButtonPopup }) {
       }
       return selectedRoom;
     });
-  }
-
-  function handleSelectedItems(selectedItems) {
-    setSelectedRooms(
-      selectedItems.map((item) => ({
-        space: item,
-        spaceId: rooms[item],
-      }))
-    );
-  }
-
-  function handleClosePopup() {
-    setSelectedRooms([]);
-    setButtonPopup(false);
   }
 
   ////////////////////////////////////////////////////////////////
