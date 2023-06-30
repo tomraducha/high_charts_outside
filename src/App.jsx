@@ -1,11 +1,11 @@
 /* BTIB */
 import DropdownRoom from "./components/DropdownRoom";
 import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
-import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
-import { getRoomId } from "./Util/utilsApp";
 import Temperature from "./components/Temperature";
 import ParameterButton from "./components/ParameterButton";
-import { fetchRoomData } from "./Util/utilsApi";
+import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
+import { getRoomId } from "./util/utilsApp";
+import { fetchRoomData } from "./util/utilsApi";
 /* Libs & plugins */
 import { useEffect, useState } from "react";
 
@@ -24,17 +24,8 @@ function App() {
   }, [rooms]);
 
   useEffect(() => {
-    async function updateSelectedRoomIds() {
-      const newSelectedRoomIds = await Promise.all(
-        selectedRoomArray.map(async (roomId) => {
-          return await getRoomId(rooms, roomId);
-        })
-      );
-      setSelectedRoomIds(newSelectedRoomIds);
-    }
-
     if (Object.keys(rooms).length > 0) {
-      updateSelectedRoomIds();
+      updateSelectedRoomIds(rooms, selectedRoomArray);
     }
   }, [rooms, selectedRoomArray]);
 
@@ -78,6 +69,15 @@ function App() {
         console.error(error);
       }
     }
+  }
+
+  async function updateSelectedRoomIds(rooms, selectedRoomArray) {
+    const newSelectedRoomIds = await Promise.all(
+      selectedRoomArray.map(async (roomId) => {
+        return await getRoomId(rooms, roomId);
+      })
+    );
+    setSelectedRoomIds(newSelectedRoomIds);
   }
 
   ////////////////////////////////////////////////////////////////

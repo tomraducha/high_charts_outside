@@ -1,6 +1,6 @@
-/* Libs & plugins */
-import useInitialize from "../../hooks/useInitialize";
 /* BTIB */
+import useInitialize from "../../hooks/useInitialize";
+/* Libs & plugins */
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsAccessibility from "highcharts/modules/accessibility";

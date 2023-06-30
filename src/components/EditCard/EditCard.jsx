@@ -2,7 +2,7 @@
 import Close from "../../images/Close.png";
 import useFetchAllRooms from "../../hooks/useFetchAllRoomsData";
 import DropdownRoom from "../DropdownRoom";
-import { fetchSpaceAndIdRooms } from "../../Util/utilsApi";
+import { fetchSpaceAndIdRooms } from "../../util/utilsApi";
 import { areSelectedRoomsEqual } from "./utils";
 /* Libs & plugins */
 import { useEffect, useState } from "react";
@@ -26,10 +26,6 @@ function EditCard({ buttonPopup, setButtonPopup }) {
   }, [spaceAndIdRooms, selectedRooms]);
 
   useEffect(() => {
-    async function fetchData() {
-      const fetchedRooms = await fetchSpaceAndIdRooms();
-      setSpaceAndIdRooms(fetchedRooms);
-    }
     fetchData();
   }, []);
 
@@ -66,6 +62,11 @@ function EditCard({ buttonPopup, setButtonPopup }) {
       }
       return selectedRoom;
     });
+  }
+
+  async function fetchData() {
+    const fetchedRooms = await fetchSpaceAndIdRooms();
+    setSpaceAndIdRooms(fetchedRooms);
   }
 
   ////////////////////////////////////////////////////////////////

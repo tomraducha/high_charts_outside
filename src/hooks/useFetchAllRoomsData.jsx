@@ -1,6 +1,6 @@
 /* BTIB */
-import { fetchAllRooms } from "../Util/utilsApi";
-import { transformArrayToObject } from "../Util/utilsApp";
+import { fetchAllRooms } from "../util/utilsApi";
+import { transformArrayToObject } from "../util/utilsApp";
 /* Libs & plugins */
 import { useState, useEffect } from "react";
 
@@ -8,18 +8,26 @@ function useFetchAllRooms() {
   const [rooms, setRooms] = useState({});
 
   useEffect(() => {
-    async function fetchAllRoomsData() {
-      try {
-        const response = await fetchAllRooms();
-        const roomsObject = transformArrayToObject(response);
-        setRooms(roomsObject);
-      } catch (error) {
-        console.error("Error during data recovery:", error);
-      }
-    }
-
     fetchAllRoomsData();
   }, []);
+
+  ////////////////////////////////////////////////////////////////
+  // Methods
+  ////////////////////////////////////////////////////////////////
+
+  async function fetchAllRoomsData() {
+    try {
+      const response = await fetchAllRooms();
+      const roomsObject = transformArrayToObject(response);
+      setRooms(roomsObject);
+    } catch (error) {
+      console.error("Error during data recovery:", error);
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return rooms;
 }

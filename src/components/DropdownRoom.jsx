@@ -1,6 +1,6 @@
 /* BTIB */
 import Mutliselect from "multiselect-react-dropdown";
-import { fetchAllRoom } from "../Util/utilsApi";
+import { fetchAllRoom } from "../util/utilsApi";
 /* Libs & plugins */
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
