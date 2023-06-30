@@ -1,0 +1,143 @@
+.app {
+  height: 100%;
+  border: 1px solid white;
+  box-shadow: rgba(21, 23, 26, 0.3) 6px 14px 11px 6px;
+  padding: 40px;
+  margin: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  .drop-down-room {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+
+    select {
+      border-radius: 4px;
+      width: 185px;
+      margin: 10px;
+      padding: 5px 5px;
+    }
+  }
+
+  .chart {
+    border-left: 2px solid #5a5959;
+    border-bottom: 2px solid #5a5959;
+    box-shadow: 1 0 0px rgba(0, 0, 0, 0.3);
+    border-radius: 1px;
+    box-sizing: border-box;
+  }
+
+  .highcharts-range-selector-buttons {
+    transform: translate(0px, -31px);
+  }
+
+  #highcharts-gx98fuw-408 {
+    border-bottom-width: 10px;
+  }
+
+  .highcharts-container select {
+    transform: translate(3px, -40px);
+  }
+
+  .highcharts-title {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, 0%);
+
+    img {
+      transform: translate(0px, 5px);
+    }
+  }
+  .search-wrapper.searchWrapper {
+    border-color: black;
+    border-width: 1px;
+    box-shadow: 0 0 0 0.07rem rgba(0, 0, 0, 0.25);
+  }
+
+  .vertical-text {
+    transform: rotate(-90deg);
+    transform-origin: left top 0;
+    position: absolute;
+    top: 62%;
+    left: 40px;
+    letter-spacing: 1px;
+    font: 18px sans-serif;
+  }
+
+  .parameter-button img {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.popup-content {
+  margin: auto;
+  background: rgb(255, 255, 255);
+  padding: 5px;
+  box-shadow: 0 0 0 0.11rem rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  width: 30%;
+
+  .optionListContainer.displayBlock {
+    bottom: 100%;
+    top: auto;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 0.11rem rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+  }
+
+  .search-wrapper.searchWrapper {
+    margin: 20px;
+    border-color: black;
+    border-width: 1px;
+    box-shadow: 0 0 0 0.02rem;
+  }
+}
+
+.selected-room {
+  background-color: #c7c6c6;
+  box-shadow: 0 0 0 0.07rem rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.edit-card {
+  position: relative;
+
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .close {
+    width: 100px;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -30px;
+    right: 0px;
+    cursor: pointer;
+  }
+
+  .selected-room {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .icon_cancel.closeIcon {
+    display: none;
+  }
+
+  .multiSelectContainer {
+    width: 100%;
+  }
+}

@@ -1,24 +1,27 @@
+/* BTIB */
 import Period from "../images/Period.svg";
-import Highcharts from "highcharts/highstock";
-import { colors } from "../data/color";
+import { infoSeries } from "../data/infoSeries";
+/* Libs & plugins */
+import PropTypes from "prop-types";
 
-export default function useInitialize(data, ceiling, floor) {
-  console.log("🚀 ~ file: useInitialize.jsx:5 ~ useInitialize ~ floor:", floor);
-  console.log(
-    "🚀 ~ file: useInitialize.jsx:5 ~ useInitialize ~ ceiling:",
-    ceiling
-  );
+function useInitialize(data) {
   const seriesData = [];
 
   data.forEach((obj, index) => {
     seriesData.push({
-      name: `Courbe ${index + 1}`,
+      name: `${infoSeries[index].room}`,
       data: obj,
-      color: `${colors[index % colors.length]}`,
+      color: `${infoSeries[index].color}`,
+      lineColor: `${infoSeries[index].lineColor}`,
     });
   });
 
   const options = {
+    plotOptions: {
+      series: {
+        lineWidth: 2,
+      },
+    },
     chart: {
       className: "chart",
       height: "800px",
@@ -67,7 +70,6 @@ export default function useInitialize(data, ceiling, floor) {
         align: "center",
         y: -40,
       },
-
       verticalAlign: "top",
       labelStyle: {
         display: "none",
@@ -125,31 +127,19 @@ export default function useInitialize(data, ceiling, floor) {
       },
       allButtonsEnabled: true,
     },
-
     yAxis: [
       {
-        floor: floor,
-        ceiling: ceiling,
+        floor: 10,
+        ceiling: 100,
         labels: {
-          enabled: false,
+          align: "left",
+          x: 0,
+          y: 0,
         },
       },
       {
         lineWidth: 0,
         opposite: false,
-      },
-      {
-        title: {
-          text: "Température",
-
-          style: {
-            fontSize: "17px",
-          },
-        },
-        opposite: false,
-        labels: {
-          enabled: false,
-        },
       },
     ],
 
@@ -158,28 +148,27 @@ export default function useInitialize(data, ceiling, floor) {
     title: {
       useHTML: true,
       text: `<img src=${Period} />`,
-      x: -28,
-      y: 10,
     },
 
     tooltip: {
       valueSuffix: "°C",
-      backgroundColor: "rgba(161, 234, 180, 0.8)",
-      borderColor: "rgba(161, 234, 180)",
+      backgroundColor: "rgba(236, 236, 237, 1)",
+      borderColor: "rgba(236, 236, 237, 1)",
       borderRadius: 20,
       borderWidth: 2,
-      shadow: false,
+      shadow: true,
       style: {
-        color: "green",
+        color: "black",
         fontSize: "15px",
       },
-
-      formatter: function () {
-        const date = Highcharts.dateFormat("%e %B %Y", this.x);
-        const temp = this.y;
-        return `<b>${date}</b><br>Temp: ${temp}°C`;
-      },
+      shared: true,
     },
   };
   return options;
 }
+
+useInitialize.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+export default useInitialize;

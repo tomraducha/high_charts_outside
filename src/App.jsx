@@ -1,61 +1,62 @@
-import { useEffect, useState } from "react";
+/* BTIB */
 import DropdownRoom from "./components/DropdownRoom";
 import HighchartsFlags from "./components/HighChartsFlags/HighchartsFlags";
-import axios from "axios";
-import { minFloor, maxFloor, getRoomId } from "./Util/utilsApp";
-import { rooms } from "./data/rooms";
+import Temperature from "./components/Temperature";
+import ParameterButton from "./components/ParameterButton";
+import useFetchAllRooms from "./hooks/useFetchAllRoomsData";
+import { getRoomId } from "./util/utilsApp";
+import { fetchRoomData } from "./util/utilsApi";
+/* Libs & plugins */
+import { useEffect, useState } from "react";
 
 function App() {
   const [data, setData] = useState([]);
   const [selectedRoomArray, setSelectedRoomArray] = useState([]);
-  const [valuesCeilingFloor, setValuesCeilingFloor] = useState({
-    ceiling: null,
-    floor: null,
-  });
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [selectedRoomIds, setSelectedRoomIds] = useState([]);
+  const rooms = useFetchAllRooms();
+
+  useEffect(() => {
+    if (Object.keys(rooms).length > 0) {
+      const firstRoom = Object.keys(rooms)[1];
+      setSelectedRoomArray([firstRoom]);
+    }
+  }, [rooms]);
+
+  useEffect(() => {
+    if (Object.keys(rooms).length > 0) {
+      updateSelectedRoomIds(rooms, selectedRoomArray);
+    }
+  }, [rooms, selectedRoomArray]);
 
   useEffect(() => {
     fetchData();
-  }, [selectedRoomArray]);
+  }, [selectedRoomIds]);
 
-  useEffect(() => {
-    getAllValues(data);
-  }, [data]);
-  import.meta.env.VITE_BASE_URL;
+  ////////////////////////////////////////////////////////////////
+  // Event handlers
+  ////////////////////////////////////////////////////////////////
+
+  function handleSelectedItems(option) {
+    setSelectedRoomArray(option);
+  }
+
+  ////////////////////////////////////////////////////////////////
+  // Methods
+  ////////////////////////////////////////////////////////////////
+
   async function fetchData() {
-    const username = import.meta.env.VITE_USERNAME;
-    const password = import.meta.env.VITE_PASSWORD;
-    const authString = username + ":" + password;
-    const encodedAuthString = btoa(authString);
-
-    const selectedRoomIds = selectedRoomArray.map((roomName) =>
-      getRoomId(rooms, roomName)
-    );
-
     if (selectedRoomIds.length > 0) {
       try {
-        const response = await Promise.all(
-          selectedRoomIds.map((roomId) =>
-            axios.get(
-              `https://192.168.12.146:443/v2/history/${roomId}?retrieveValues=true&period=lastYear`,
-              {
-                headers: {
-                  mode: "cors",
-                  Authorization: "Basic " + encodedAuthString,
-                },
-              }
-            )
-          )
-        );
+        const response = await fetchRoomData(selectedRoomIds);
         const dataRoom = response.map((element) => {
           return element.data[0].data;
         });
-
         const dataTimesValue = dataRoom.map((element) => {
           return element.map((data) => {
             return data;
           });
         });
-
         const resultData = dataTimesValue.map((elements) => {
           return elements.map((element) => {
             const timestamp = new Date(element.Timestamp).getTime();
@@ -70,32 +71,32 @@ function App() {
     }
   }
 
-  function getAllValues(data) {
-    const allValues = [];
-
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].length; j++) {
-        allValues.push(data[i][j][1]);
-      }
-    }
-    const resultAllValues = allValues;
-    const ceiling = maxFloor(resultAllValues);
-    const floor = minFloor(resultAllValues);
-    setValuesCeilingFloor({ ceiling, floor });
+  async function updateSelectedRoomIds(rooms, selectedRoomArray) {
+    const newSelectedRoomIds = await Promise.all(
+      selectedRoomArray.map(async (roomId) => {
+        return await getRoomId(rooms, roomId);
+      })
+    );
+    setSelectedRoomIds(newSelectedRoomIds);
   }
 
-  function handleSelect(option) {
-    setSelectedRoomArray(option);
-  }
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return (
     <div className="app">
-      <DropdownRoom onSelect={handleSelect} />
-      <HighchartsFlags
-        data={data}
-        ceiling={valuesCeilingFloor.ceiling}
-        floor={valuesCeilingFloor.floor}
+      <ParameterButton
+        buttonPopup={buttonPopup}
+        setButtonPopup={setButtonPopup}
       />
+      <DropdownRoom
+        onSelect={handleSelectedItems}
+        defaultSelected={selectedRoomArray}
+        placeholder="Sélectionner des pièces"
+      />
+      <HighchartsFlags data={data} />
+      <Temperature />
     </div>
   );
 }

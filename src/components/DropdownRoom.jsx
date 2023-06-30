@@ -1,12 +1,32 @@
-import React from "react";
+/* BTIB */
 import Mutliselect from "multiselect-react-dropdown";
+import { fetchAllRoom } from "../util/utilsApi";
+/* Libs & plugins */
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
-function DropdownRoom({ onSelect }) {
-  const room = ["Polux", "Sirius", "Proxima", "Scuti"];
+function DropdownRoom({ onSelect, placeholder, defaultSelected = [] }) {
+  const [room, setRoom] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetchAllRoom();
+      setRoom(data);
+    }
+    fetchData();
+  }, []);
+
+  ////////////////////////////////////////////////////////////////
+  // Event handlers
+  ////////////////////////////////////////////////////////////////
 
   function handleOptionSelect(selectedItems) {
     onSelect([...selectedItems]);
   }
+
+  ////////////////////////////////////////////////////////////////
+  // JSX
+  ////////////////////////////////////////////////////////////////
 
   return (
     <div className="drop-down-room">
@@ -14,11 +34,12 @@ function DropdownRoom({ onSelect }) {
         isObject={false}
         options={room}
         showCheckbox={true}
-        selectedValues={[]}
+        selectedValues={defaultSelected}
+        placeholder={placeholder}
         style={{
           chips: {
-            background: "rgba(0, 0, 0, 0.1)",
-            color: "black",
+            background: "rgba(46, 44, 45, 0.8)",
+            color: "white",
             fontSize: "1rem",
           },
         }}
@@ -28,5 +49,10 @@ function DropdownRoom({ onSelect }) {
     </div>
   );
 }
+DropdownRoom.propTypes = {
+  onSelect: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  defaultSelected: PropTypes.array,
+};
 
 export default DropdownRoom;
